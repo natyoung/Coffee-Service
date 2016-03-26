@@ -1,10 +1,9 @@
 package org.coffee.service;
 
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import model.Coffee;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
@@ -35,4 +34,14 @@ public class CoffeeService {
                 .entity("READY")
                 .build();
     }
+
+    @POST
+    @Path("/order/{coffee_name}")
+    @Produces("application/json")
+    public Response orderCoffeeByName(@PathParam("coffee_name") String name) {
+        return Response.status(Response.Status.CREATED)
+                .entity("READY")
+                .build();
+    }
+
 }

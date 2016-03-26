@@ -3,6 +3,7 @@ package org.coffee.service;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
+import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import model.Coffee;
 import org.junit.*;
@@ -42,8 +43,8 @@ public class CoffeeServiceTest {
     @Test
     public void testGetMenuReturnsOK() throws Exception {
         URL url = baseURI.resolve("/menu").toURL();
-        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-        Assert.assertEquals(HttpResponseStatus.OK.code(), urlConn.getResponseCode());
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        Assert.assertEquals(HttpResponseStatus.OK.code(), urlConnection.getResponseCode());
     }
 
     @Test
@@ -60,6 +61,15 @@ public class CoffeeServiceTest {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         String response = getResponse(urlConnection);
         Assert.assertEquals(response, "\"READY\"");
+    }
+
+    @Test
+    public void testOrderCoffeeReturnsCreated() throws Exception {
+        URL url = baseURI.resolve("/order/long_black").toURL();
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setDoOutput(true);
+        urlConnection.setRequestMethod(HttpMethod.POST.name());
+        Assert.assertEquals(HttpResponseStatus.CREATED.code(), urlConnection.getResponseCode());
     }
 
     @AfterClass
