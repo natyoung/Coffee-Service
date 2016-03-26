@@ -53,8 +53,8 @@ public class MenuServiceTest {
         Assert.assertTrue(json.equals(GSON.toJson(menu)));
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterClass
+    public static void tearDown() throws Exception {
         microservicesRunner.stop();
     }
 }
