@@ -8,12 +8,13 @@ import model.Coffee;
 import org.junit.*;
 import org.wso2.msf4j.MicroservicesRunner;
 
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
-public class MenuServiceTest {
+public class CoffeeServiceTest {
     private static URI baseURI;
     private static final Gson GSON = new Gson();
     private static final Map<String, List<Coffee>> menu = Collections.unmodifiableMap(
@@ -34,7 +35,7 @@ public class MenuServiceTest {
     public static void setup() throws Exception {
         baseURI = URI.create(String.format("http://%s:%d", "localhost", 4568));
         microservicesRunner
-                .deploy(new MenuService(menu))
+                .deploy(new CoffeeService(menu))
                 .start();
     }
 
@@ -48,13 +49,25 @@ public class MenuServiceTest {
     @Test
     public void testGetMenuReturnsListOfCoffees() throws Exception {
         URL url = baseURI.resolve("/menu").toURL();
-        HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-        String json = new String(ByteStreams.toByteArray(urlConn.getInputStream()), Charsets.UTF_8);
-        Assert.assertTrue(json.equals(GSON.toJson(menu)));
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        String response = getResponse(urlConnection);
+        Assert.assertTrue(response.equals(GSON.toJson(menu)));
+    }
+
+    @Test
+    public void testThatCoffeeIsReady() throws Exception {
+        URL url = baseURI.resolve("/order/123").toURL();
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        String response = getResponse(urlConnection);
+        Assert.assertEquals(response, "\"READY\"");
     }
 
     @AfterClass
     public static void tearDown() throws Exception {
         microservicesRunner.stop();
+    }
+
+    protected String getResponse(HttpURLConnection urlConnection) throws IOException {
+        return new String(ByteStreams.toByteArray(urlConnection.getInputStream()), Charsets.UTF_8);
     }
 }

@@ -20,7 +20,7 @@ public class Application {
                     put("coffees", coffees);
                 }});
         new MicroservicesRunner(4567)
-                .deploy(new MenuService(menu))
+                .deploy(new CoffeeService(menu))
                 .start();
     }
 }
