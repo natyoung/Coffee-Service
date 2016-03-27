@@ -1,17 +1,15 @@
 package org.coffee.service;
 
-import org.coffee.model.Coffee;
+import org.coffee.domain.Menu;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.Map;
 
 @Path("/")
 public class CoffeeService {
-    private final Map<String, List<Coffee>> menu;
+    private final Menu menu;
 
-    public CoffeeService(Map<String, List<Coffee>> menu) {
+    public CoffeeService(Menu menu) {
         this.menu = menu;
     }
 
@@ -20,7 +18,7 @@ public class CoffeeService {
     @Produces("application/json")
     public Response getMenu() {
         return Response.status(Response.Status.OK)
-                .entity(menu)
+                .entity(menu.getCoffees())
                 .build();
     }
 
