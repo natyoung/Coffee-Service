@@ -21,7 +21,7 @@ import java.net.URL;
 
 public class CoffeeServiceTest {
     private static URI baseURI;
-    private static final int TEST_PORT = Application.PORT + 1;
+    private static final int TEST_PORT = Application.DEFAULT_PORT + 1;
     private static final Gson GSON = new Gson();
     private static final Menu menu = new Menu(new DataStoreMock());
     private static final MicroservicesRunner microservicesRunner = new MicroservicesRunner(TEST_PORT);
