@@ -24,11 +24,13 @@ public class DataStore {
         if(this.pool == null) {
             try {
                 URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
+                String password = redisURI.getUserInfo().equals(":") ? null : redisURI.getUserInfo().split(":",2)[1];
+                System.out.println(password);
                 this.pool = new JedisPool(new JedisPoolConfig(),
                         redisURI.getHost(),
                         redisURI.getPort(),
                         Protocol.DEFAULT_TIMEOUT,
-                        null);
+                        password);
             }
             catch(URISyntaxException e) {
                 throw new RuntimeException();
@@ -79,6 +81,12 @@ public class DataStore {
 
     public void setUp() {
         clean();
+        insertCoffees();
+        insertOrders();
+        insertOrderStatuses();
+    }
+
+    private void insertCoffees() {
         new ArrayList<Coffee>() {{
             add(new Coffee("long black", "/createOrder/long-black", 3, 8, 0));
             add(new Coffee("flat white", "/createOrder/flat-white", 3.5, 5, 2));
@@ -86,6 +94,9 @@ public class DataStore {
             add(new Coffee("espresso", "/createOrder/espresso", 2, 10, 0));
             add(new Coffee("machiato", "/createOrder/machiato", 2.5, 10, 0.5));
         }}.stream().forEach(c -> addToList(Application.KEY_COFFEES, GSON.toJson(c, Coffee.class)));
+    }
+
+    private void insertOrders() {
         final List<String> extras = Collections.unmodifiableList(new ArrayList<String>() {{
             add("skim-milk");
             add("sugar");
@@ -93,8 +104,10 @@ public class DataStore {
         Collections.nCopies(123, new Order("long black", "small", extras))
                 .stream()
                 .forEach(o -> addToList(Application.KEY_ORDERS, GSON.toJson(o, Order.class)));
-        IntStream.range(1, 124)
-                .forEach((i) -> set(String.valueOf(i), "READY"));
+    }
+
+    private void insertOrderStatuses() {
+        IntStream.range(1, 124).forEach((i) -> set(String.valueOf(i), "READY"));
     }
 
     private void clean() {
