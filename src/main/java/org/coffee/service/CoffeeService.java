@@ -1,6 +1,8 @@
 package org.coffee.service;
 
+import org.coffee.domain.beans.Order;
 import org.coffee.domain.Menu;
+import org.coffee.service.params.OrderDetails;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -25,7 +27,7 @@ public class CoffeeService {
     @GET
     @Path("/order/{order_id}")
     @Produces("application/json")
-    public Response getOrderById() {
+    public Response getOrder() {
         return Response.status(Response.Status.OK)
                 .entity("READY")
                 .build();
@@ -33,10 +35,14 @@ public class CoffeeService {
 
     @POST
     @Path("/order/{coffee_name}")
+    @Consumes("application/json")
     @Produces("application/json")
-    public Response orderCoffeeByName(@PathParam("coffee_name") String name) {
+    public Response orderCoffee(@PathParam("coffee_name") String coffeeName,
+                                final OrderDetails orderDetails) {
+        Order order = new Order(coffeeName, orderDetails.size, orderDetails.extras);
+        String orderResult = menu.createOrder(order);
         return Response.status(Response.Status.CREATED)
-                .entity("{\"order\":\"/order/123\",\"wait_time\":\"5\"}")
+                .entity(orderResult)
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package org.coffee.domain;
+package org.coffee.domain.beans;
 
 public class Coffee {
     private final String name;
