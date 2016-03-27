@@ -9,7 +9,6 @@ public class Application {
     public static final int PORT = 4567;
     public static final String KEY_COFFEES = "coffees";
     public static final String KEY_ORDERS = "orders";
-    public static final String KEY_STATUSES = "statuses";
 
     public static void main(String[] args) throws URISyntaxException {
         final DataStore dataStore = new DataStore();

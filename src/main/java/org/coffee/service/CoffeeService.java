@@ -27,9 +27,15 @@ public class CoffeeService {
     @GET
     @Path("/order/{order_id}")
     @Produces("application/json")
-    public Response getOrder() {
+    public Response getOrder(@PathParam("order_id") long orderId) {
+        String orderStatus = menu.getOrderStatus(orderId);
+        if(orderStatus == null) {
+            return Response.status(Response.Status.NOT_FOUND).
+                    entity("No order was found with that ID").
+                    build();
+        }
         return Response.status(Response.Status.OK)
-                .entity("READY")
+                .entity(orderStatus)
                 .build();
     }
 

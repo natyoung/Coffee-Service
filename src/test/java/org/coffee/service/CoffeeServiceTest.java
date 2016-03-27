@@ -50,11 +50,18 @@ public class CoffeeServiceTest {
     }
 
     @Test
-    public void testThatCoffeeIsReady() throws Exception {
-        URL url = baseURI.resolve("/order/123").toURL();
+    public void testThatReadyCoffeeReturnsReady() throws Exception {
+        URL url = baseURI.resolve("/order/321").toURL();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         String response = getResponse(urlConnection);
         Assert.assertEquals(response, "\"READY\"");
+    }
+
+    @Test
+    public void testThatNonExistentOrderIdReturnsErrorCode() throws Exception {
+        URL url = baseURI.resolve("/order/123").toURL();
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        Assert.assertEquals(HttpResponseStatus.NOT_FOUND.code(), urlConnection.getResponseCode());
     }
 
     @Test
@@ -66,7 +73,7 @@ public class CoffeeServiceTest {
     }
 
     @Test
-    public void testOrderCoffeeReturns() throws Exception {
+    public void testOrderCoffeeReturnsOrderResponse() throws Exception {
         URL url = baseURI.resolve("/order/long_black").toURL();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         setPostParams(urlConnection, "{\"size\":\"large\", \"extras\":[\"skim-milk\",\"sugar\"]}");

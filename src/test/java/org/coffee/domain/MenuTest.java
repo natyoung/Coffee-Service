@@ -29,4 +29,10 @@ public class MenuTest {
         String orderResult = menu.createOrder(order);
         Assert.assertEquals("{\"order\":321,\"wait_time\":5}", orderResult);
     }
+
+    @Test
+    public void testOrderStatusIsReady() throws Exception {
+        String orderStatus = menu.getOrderStatus(321);
+        Assert.assertTrue(orderStatus.equals("READY"));
+    }
 }

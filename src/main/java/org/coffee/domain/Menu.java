@@ -23,11 +23,12 @@ public class Menu {
 
     public String createOrder(Order order) {
         long orderId = this.dataStore.addToList(Application.KEY_ORDERS, GSON.toJson(order, Order.class));
+        this.dataStore.set(String.valueOf(orderId), "READY");
         OrderResponse response = new OrderResponse(orderId, 5);
         return GSON.toJson(response, OrderResponse.class);
     }
 
     public String getOrderStatus(long orderId) {
-        return "READY";
+        return this.dataStore.get(String.valueOf(orderId));
     }
 }
