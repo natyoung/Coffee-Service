@@ -25,7 +25,6 @@ public class DataStore {
             try {
                 URI redisURI = new URI(System.getenv("REDISTOGO_URL"));
                 String password = redisURI.getUserInfo().equals(":") ? null : redisURI.getUserInfo().split(":",2)[1];
-                System.out.println(password);
                 this.pool = new JedisPool(new JedisPoolConfig(),
                         redisURI.getHost(),
                         redisURI.getPort(),
