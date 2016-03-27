@@ -1,11 +1,9 @@
 package org.coffee.service;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
-import model.Coffee;
+import org.coffee.model.Coffee;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +38,7 @@ public class CoffeeService {
     @Produces("application/json")
     public Response orderCoffeeByName(@PathParam("coffee_name") String name) {
         return Response.status(Response.Status.CREATED)
-                .entity("READY")
+                .entity("{\"order\":\"/order/123\",\"wait_time\":\"5\"}")
                 .build();
     }
-
 }

@@ -1,4 +1,4 @@
-package model;
+package org.coffee.model;
 
 public class Coffee {
     private final String name;

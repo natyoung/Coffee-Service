@@ -5,7 +5,7 @@ import com.google.common.io.ByteStreams;
 import com.google.gson.Gson;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpResponseStatus;
-import model.Coffee;
+import org.coffee.model.Coffee;
 import org.junit.*;
 import org.wso2.msf4j.MicroservicesRunner;
 
@@ -41,7 +41,7 @@ public class CoffeeServiceTest {
     }
 
     @Test
-    public void testGetMenuReturnsOK() throws Exception {
+    public void testGetMenuReturnsHttpResponseStatusOK() throws Exception {
         URL url = baseURI.resolve("/menu").toURL();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         Assert.assertEquals(HttpResponseStatus.OK.code(), urlConnection.getResponseCode());
@@ -64,12 +64,22 @@ public class CoffeeServiceTest {
     }
 
     @Test
-    public void testOrderCoffeeReturnsCreated() throws Exception {
+    public void testOrderCoffeeReturnsHttpResponseStatusCreated() throws Exception {
         URL url = baseURI.resolve("/order/long_black").toURL();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setDoOutput(true);
         urlConnection.setRequestMethod(HttpMethod.POST.name());
         Assert.assertEquals(HttpResponseStatus.CREATED.code(), urlConnection.getResponseCode());
+    }
+
+    @Test
+    public void testOrderCoffeeReturns() throws Exception {
+        URL url = baseURI.resolve("/order/long_black").toURL();
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setDoOutput(true);
+        urlConnection.setRequestMethod(HttpMethod.POST.name());
+        String response = getResponse(urlConnection);
+        Assert.assertEquals("\"{\\\"order\\\":\\\"/order/123\\\",\\\"wait_time\\\":\\\"5\\\"}\"", response);
     }
 
     @AfterClass

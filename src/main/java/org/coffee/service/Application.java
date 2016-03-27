@@ -1,6 +1,6 @@
 package org.coffee.service;
 
-import model.Coffee;
+import org.coffee.model.Coffee;
 import org.wso2.msf4j.MicroservicesRunner;
 
 import java.util.*;
