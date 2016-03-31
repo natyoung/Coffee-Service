@@ -6,6 +6,7 @@ import org.coffee.domain.beans.Order;
 import org.coffee.domain.beans.OrderResponse;
 import org.coffee.service.Application;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Menu {
@@ -17,8 +18,10 @@ public class Menu {
         this.dataStore = dataStore;
     }
 
-    public List<String> getCoffees() {
-        return this.dataStore.getAllInList(Application.KEY_COFFEES);
+    public HashMap<String, List<String>> getCoffees() {
+        HashMap<String, List<String>> map = new HashMap<>();
+        map.put(Application.KEY_COFFEES, this.dataStore.getAllInList(Application.KEY_COFFEES));
+        return map;
     }
 
     public String createOrder(Order order) {
