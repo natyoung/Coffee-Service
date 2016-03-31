@@ -2,12 +2,16 @@ package org.coffee.domain;
 
 import com.google.gson.Gson;
 import org.coffee.data.DataStore;
+import org.coffee.domain.beans.Coffee;
 import org.coffee.domain.beans.Order;
 import org.coffee.domain.beans.OrderResponse;
 import org.coffee.service.Application;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Menu {
     private final DataStore dataStore;
@@ -18,9 +22,13 @@ public class Menu {
         this.dataStore = dataStore;
     }
 
-    public HashMap<String, List<String>> getCoffees() {
-        HashMap<String, List<String>> map = new HashMap<>();
-        map.put(Application.KEY_COFFEES, this.dataStore.getAllInList(Application.KEY_COFFEES));
+    public HashMap<String, List<Coffee>> getCoffees() {
+        List<Coffee> coffees = this.dataStore.getAllInList(Application.KEY_COFFEES)
+            .stream()
+            .map(c -> GSON.fromJson(c, Coffee.class))
+            .collect(Collectors.toCollection(ArrayList::new));
+        HashMap<String, List<Coffee>> map = new HashMap<>();
+        map.put(Application.KEY_COFFEES, coffees);;
         return map;
     }
 
@@ -32,6 +40,6 @@ public class Menu {
     }
 
     public String getOrderStatus(long orderId) {
-        return this.dataStore.get(String.valueOf(orderId));
+        return this.dataStore.get(GSON.toJson(orderId));
     }
 }

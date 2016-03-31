@@ -1,5 +1,6 @@
 package org.coffee.service;
 
+import org.coffee.domain.beans.Coffee;
 import org.coffee.domain.beans.Order;
 import org.coffee.domain.Menu;
 import org.coffee.service.params.OrderDetails;
