@@ -1,0 +1,41 @@
+{
+  "request": {
+    "headers": {
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Accept": "*/*"
+    },
+    "http_method": "get",
+    "path": "/order/{order_id}"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "status": 200,
+    "schema": {
+      "$schema": "http://json-schema.org/draft-03/schema#",
+      "description": "the schema for the POST order API.",
+      "type": "string",
+      "required": true,
+      "properties": {
+        "status": {
+          "type": "string",
+          "required": true,
+          "pattern": "^(READY|MAKING|QUEUED|DELAYED)$"
+        }
+      }
+    }
+  },
+  "examples": {
+    "default": {
+      "request": {
+        "uri": "http://localhost:4567/order/123"
+      },
+      "response": {
+        "body": {
+          "status": "READY"
+        }
+      }
+    }
+  }
+}

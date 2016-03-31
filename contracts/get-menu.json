@@ -1,0 +1,104 @@
+{
+  "request": {
+    "headers": {
+      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+      "Accept": "*/*"
+    },
+    "http_method": "get",
+    "path": "/menu"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "status": 200,
+    "schema": {
+      "$schema": "http://json-schema.org/draft-03/schema#",
+      "description": "Generated from http://localhost:4567/menu with shasum 29aede83f8ddc8e18eff4efa1edf87979f38c013",
+      "type": "string",
+      "required": true,
+      "properties": {
+        "coffees": {
+          "type": "array",
+          "required": true,
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": true,
+            "properties": {
+              "name": {
+                "type": "string",
+                "required": true
+              },
+              "order_path": {
+                "type": "string",
+                "required": true
+              },
+              "price": {
+                "type": "number",
+                "required": true
+              },
+              "caffeine_level": {
+                "type": "integer",
+                "required": true
+              },
+              "milk_ratio": {
+                "type": "number",
+                "required": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "examples": {
+    "default": {
+      "request": {
+        "uri": "http://localhost:4567/menu"
+      },
+      "response": {
+        "body": {
+          "coffees": [
+            {
+              "name": "long black",
+              "order_path": "/order/long-black",
+              "price": 3,
+              "caffeine_level": 8,
+              "milk_ratio": 0
+            },
+            {
+              "name": "flat white",
+              "order_path": "/order/flat-white",
+              "price": 3.5,
+              "caffeine_level": 5,
+              "milk_ratio": 2
+            },
+            {
+              "name": "latte",
+              "order_path": "/order/latte",
+              "price": 3.5,
+              "caffeine_level": 5,
+              "milk_ratio": 3
+            },
+            {
+              "name": "espresso",
+              "order_path": "/order/espresso",
+              "price": 2,
+              "caffeine_level": 10,
+              "milk_ratio": 0
+            },
+            {
+              "name": "machiato",
+              "order_path":" /order/machiato",
+              "price": 2.5,
+              "caffeine_level": 10,
+              "milk_ratio": 0.5
+            }
+          ]
+        }
+      }
+    }
+  }
+}

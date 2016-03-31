@@ -1,0 +1,71 @@
+{
+  "request": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "http_method": "post",
+    "path": "/order/{coffee_name}",
+    "schema": {
+      "$schema": "http://json-schema.org/draft-03/schema#",
+      "description": "Generated from http://localhost:4567/order/123 with shasum 90c74f5f4637058e877163d90cb306ec66a79eaa",
+      "type": "object",
+      "required": true,
+      "properties": {
+        "size": {
+          "type": "string",
+          "required": true
+        },
+        "extras": {
+          "type": "array",
+          "required": true,
+          "minItems": 0,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "required": true
+          }
+        },
+        "pickup_time": {
+          "type": "string",
+          "format": "date-time",
+          "required": false
+        }
+      }
+    }
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "status": 201,
+    "schema": {
+      "$schema": "http://json-schema.org/draft-03/schema#",
+      "description": "Generated from http://localhost:4567/order/long-black with shasum af1b24c086059018bbc9a24b68d9350952b8e0f2",
+      "type": "string",
+      "required": true,
+      "properties": {
+        "order": {
+          "type": "string",
+          "required": true
+        },
+        "wait_time": {
+          "type": "int",
+          "required": true
+        }
+      }
+    }
+  },
+  "examples": {
+    "default": {
+      "request": {
+        "method": "post",
+        "uri": "http://localhost:4567/order/long-black",
+        "body": "{\"size\":\"small\",\"extras\":[\"skim-milk\",\"sugar\"]}"
+      },
+      "response": {
+        "status": 201,
+        "body": "{\"order\":\"/order/123\",\"wait_time\":\"5\"}"
+      }
+    }
+  }
+}
