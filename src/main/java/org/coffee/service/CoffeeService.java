@@ -1,6 +1,5 @@
 package org.coffee.service;
 
-import org.coffee.domain.beans.Coffee;
 import org.coffee.domain.beans.Order;
 import org.coffee.domain.Menu;
 import org.coffee.service.params.OrderDetails;
@@ -9,7 +8,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.HashMap;
-import java.util.List;
 
 @Path("/")
 public class CoffeeService {
@@ -32,12 +30,7 @@ public class CoffeeService {
     @Path("/order/{order_id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("order_id") long orderId) {
-        String orderStatus = menu.getOrderStatus(orderId);
-        if(orderStatus == null) {
-            return Response.status(Response.Status.NOT_FOUND).
-                    entity("No order was found with that ID").
-                    build();
-        }
+        HashMap<String, String> orderStatus = menu.getOrderStatus(orderId);
         return Response.status(Response.Status.OK)
                 .entity(orderStatus)
                 .build();

@@ -37,8 +37,8 @@ public class MenuTest {
 
     @Test
     public void testOrderStatusIsReady() throws Exception {
-        String orderStatus = menu.getOrderStatus(321);
-        Assert.assertTrue(orderStatus.equals("READY"));
+        HashMap<String, String> orderStatus = menu.getOrderStatus(321);
+        Assert.assertTrue(orderStatus.get("status").equals("READY"));
     }
 
     @Test

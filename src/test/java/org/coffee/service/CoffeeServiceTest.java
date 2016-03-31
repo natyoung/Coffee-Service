@@ -54,14 +54,7 @@ public class CoffeeServiceTest {
         URL url = baseURI.resolve("/order/321").toURL();
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         String response = getResponse(urlConnection);
-        Assert.assertEquals(response, "\"READY\"");
-    }
-
-    @Test
-    public void testThatNonExistentOrderIdReturnsErrorCode() throws Exception {
-        URL url = baseURI.resolve("/order/123").toURL();
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        Assert.assertEquals(HttpResponseStatus.NOT_FOUND.code(), urlConnection.getResponseCode());
+        Assert.assertEquals("{\"status\":\"READY\"}", response);
     }
 
     @Test

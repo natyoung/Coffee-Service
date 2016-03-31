@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Menu {
     private final DataStore dataStore;
@@ -34,12 +33,15 @@ public class Menu {
 
     public String createOrder(Order order) {
         long orderId = this.dataStore.addToList(Application.KEY_ORDERS, GSON.toJson(order, Order.class));
-        this.dataStore.set(String.valueOf(orderId), "READY");
+        this.dataStore.set(String.valueOf(orderId), Application.COFFEE_STATUS);
         OrderResponse response = new OrderResponse(orderId, 5);
         return GSON.toJson(response, OrderResponse.class);
     }
 
-    public String getOrderStatus(long orderId) {
-        return this.dataStore.get(GSON.toJson(orderId));
+    public HashMap<String, String> getOrderStatus(long orderId) {
+        String order = this.dataStore.get(String.valueOf(orderId));
+        HashMap<String, String> status = new HashMap<>();
+        status.put(Application.KEY_ORDER_STATUS, order);
+        return status;
     }
 }
