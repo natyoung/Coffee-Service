@@ -12,7 +12,7 @@ A solution to the [March Software Shokunin Challenge](https://github.com/softwar
     ./go run
 
 ### Modify the contracts to work with Java
-    change "type": "object" to "type": "string"
+    delete the header encoding requirements
 
 ### Output:
 ```bash

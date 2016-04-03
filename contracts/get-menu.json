@@ -52,7 +52,7 @@
   "examples": {
     "default": {
       "request": {
-        "uri": "http://localhost:4567/menu"
+        "uri": "https://msf4j-march-shokunin.herokuapp.com/menu"
       },
       "response": {
         "body": {

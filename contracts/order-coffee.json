@@ -59,7 +59,7 @@
     "default": {
       "request": {
         "method": "post",
-        "uri": "http://localhost:4567/order/long-black",
+        "uri": "https://msf4j-march-shokunin.herokuapp.com/order/long-black",
         "body": "{\"size\":\"small\",\"extras\":[\"skim-milk\",\"sugar\"]}"
       },
       "response": {
