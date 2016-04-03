@@ -2,6 +2,7 @@ package org.coffee.service;
 
 import org.coffee.domain.beans.Order;
 import org.coffee.domain.Menu;
+import org.coffee.domain.beans.OrderResponse;
 import org.coffee.service.params.OrderDetails;
 
 import javax.ws.rs.*;
@@ -30,7 +31,7 @@ public class CoffeeService {
     @Path("/order/{order_id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getOrder(@PathParam("order_id") long orderId) {
-        HashMap<String, String> orderStatus = menu.getOrderStatus(orderId);
+        final HashMap<String, String> orderStatus = menu.getOrderStatus(orderId);
         return Response.status(Response.Status.OK)
                 .entity(orderStatus)
                 .build();
@@ -42,8 +43,8 @@ public class CoffeeService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response orderCoffee(@PathParam("coffee_name") String coffeeName,
                                 final OrderDetails orderDetails) {
-        Order order = new Order(coffeeName, orderDetails.size, orderDetails.extras);
-        String orderResult = menu.createOrder(order);
+        final Order order = new Order(coffeeName, orderDetails.size, orderDetails.extras);
+        final OrderResponse orderResult = menu.createOrder(order);
         return Response.status(Response.Status.CREATED)
                 .entity(orderResult)
                 .build();

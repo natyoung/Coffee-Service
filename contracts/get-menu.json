@@ -1,9 +1,5 @@
 {
   "request": {
-    "headers": {
-      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-      "Accept": "*/*"
-    },
     "http_method": "get",
     "path": "/menu"
   },
@@ -15,7 +11,7 @@
     "schema": {
       "$schema": "http://json-schema.org/draft-03/schema#",
       "description": "Generated from http://localhost:4567/menu with shasum 29aede83f8ddc8e18eff4efa1edf87979f38c013",
-      "type": "string",
+      "type": "object",
       "required": true,
       "properties": {
         "coffees": {

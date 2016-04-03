@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.coffee.data.DataStore;
 import org.coffee.domain.beans.Coffee;
 import org.coffee.domain.beans.Order;
+import org.coffee.domain.beans.OrderResponse;
 import org.coffee.mocks.DataStoreMock;
 import org.coffee.service.Application;
 import org.junit.Assert;
@@ -31,8 +32,9 @@ public class MenuTest {
             add("flour");
         }};
         Order order = new Order("long black", "large", extras);
-        String orderResult = menu.createOrder(order);
-        Assert.assertEquals("{\"order\":321,\"wait_time\":5}", orderResult);
+        OrderResponse orderResponse = menu.createOrder(order);
+        OrderResponse expected = new OrderResponse("321", 5);
+        Assert.assertEquals(expected, orderResponse);
     }
 
     @Test

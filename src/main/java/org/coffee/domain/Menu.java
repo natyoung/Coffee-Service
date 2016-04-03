@@ -31,11 +31,10 @@ public class Menu {
         return map;
     }
 
-    public String createOrder(Order order) {
+    public OrderResponse createOrder(Order order) {
         long orderId = this.dataStore.addToList(Application.KEY_ORDERS, GSON.toJson(order, Order.class));
         this.dataStore.set(String.valueOf(orderId), Application.COFFEE_STATUS);
-        OrderResponse response = new OrderResponse(orderId, 5);
-        return GSON.toJson(response, OrderResponse.class);
+        return new OrderResponse(String.valueOf(orderId), 5);
     }
 
     public HashMap<String, String> getOrderStatus(long orderId) {

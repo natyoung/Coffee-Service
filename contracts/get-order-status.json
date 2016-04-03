@@ -1,9 +1,5 @@
 {
   "request": {
-    "headers": {
-      "Accept-Encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-      "Accept": "*/*"
-    },
     "http_method": "get",
     "path": "/order/{order_id}"
   },
@@ -15,7 +11,7 @@
     "schema": {
       "$schema": "http://json-schema.org/draft-03/schema#",
       "description": "the schema for the POST order API.",
-      "type": "string",
+      "type": "object",
       "required": true,
       "properties": {
         "status": {

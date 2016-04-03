@@ -41,7 +41,7 @@
     "schema": {
       "$schema": "http://json-schema.org/draft-03/schema#",
       "description": "Generated from http://localhost:4567/order/long-black with shasum af1b24c086059018bbc9a24b68d9350952b8e0f2",
-      "type": "string",
+      "type": "object",
       "required": true,
       "properties": {
         "order": {

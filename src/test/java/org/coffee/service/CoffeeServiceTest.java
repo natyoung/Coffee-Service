@@ -71,7 +71,7 @@ public class CoffeeServiceTest {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         setPostParams(urlConnection, "{\"size\":\"large\", \"extras\":[\"skim-milk\",\"sugar\"]}");
         String response = getResponse(urlConnection);
-        Assert.assertEquals("\"{\\\"order\\\":321,\\\"wait_time\\\":5}\"", response);
+        Assert.assertEquals("{\"order\":\"321\",\"wait_time\":5}", response);
     }
 
     @AfterClass
