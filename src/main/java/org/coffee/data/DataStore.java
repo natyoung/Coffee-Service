@@ -87,11 +87,11 @@ public class DataStore {
 
     private void insertCoffees() {
         new ArrayList<Coffee>() {{
-            add(new Coffee("long black", "/createOrder/long-black", 3, 8, 0));
-            add(new Coffee("flat white", "/createOrder/flat-white", 3.5, 5, 2));
-            add(new Coffee("latte", "/createOrder/latte", 3.5, 5, 3));
-            add(new Coffee("espresso", "/createOrder/espresso", 2, 10, 0));
-            add(new Coffee("machiato", "/createOrder/machiato", 2.5, 10, 0.5));
+            add(new Coffee("long black", "/order/long-black", 3, 8, 0));
+            add(new Coffee("flat white", "/order/flat-white", 3.5, 5, 2));
+            add(new Coffee("latte", "/order/latte", 3.5, 5, 3));
+            add(new Coffee("espresso", "/order/espresso", 2, 10, 0));
+            add(new Coffee("machiato", "/order/machiato", 2.5, 10, 0.5));
         }}.stream().forEach(c -> addToList(Application.KEY_COFFEES, GSON.toJson(c, Coffee.class)));
     }
 
